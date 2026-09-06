@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rupkaar — Arriving 01.02.2027</title>
+<link rel="icon" type="image/svg+xml" href="rupkaar-icon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink: #050505;
+    --char: #131314;
+    --line: #3a3a3c;
+    --silver-hi: #ffffff;
+    --silver: #d8d8d6;
+    --silver-mid: #aeaeac;
+    --silver-dim: #74746f;
+  }
+
+  *{ box-sizing: border-box; }
+
+  html,body{
+    margin:0;
+    padding:0;
+    background: var(--ink);
+    color: var(--silver);
+    font-family: 'Jost', sans-serif;
+    height: 100%;
+    overflow-x: hidden;
+  }
+
+  .bg-photo{
+    position: fixed;
+    inset: -3% -3%;
+    background-image: url('jewellery-bg.jpg');
+    background-size: cover;
+    background-position: center 30%;
+    filter: grayscale(35%) brightness(1.15) contrast(1.2) saturate(0.85);
+    z-index: 0;
+    transition: transform .3s ease-out;
+    will-change: transform;
+  }
+
+  .bg-fade{
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    background:
+      radial-gradient(ellipse at 50% 38%, rgba(5,5,5,0.05) 0%, rgba(5,5,5,0.5) 40%, var(--ink) 84%),
+      linear-gradient(to bottom, var(--ink) 0%, rgba(5,5,5,0.25) 18%, rgba(5,5,5,0.3) 78%, var(--ink) 100%);
+  }
+
+  .bg-sweep{
+    position: fixed;
+    inset: -20% -60%;
+    z-index: 0;
+    pointer-events: none;
+    background: linear-gradient(100deg,
+      rgba(255,255,255,0) 42%,
+      rgba(255,255,255,0.10) 48%,
+      rgba(255,255,255,0.22) 50%,
+      rgba(255,255,255,0.10) 52%,
+      rgba(255,255,255,0) 58%);
+    transform: translateX(-100%);
+    animation: sweep 2.6s ease-in-out 0.4s 1 forwards;
+  }
+  @keyframes sweep{ to{ transform: translateX(100%); } }
+
+  body{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    min-height: 100vh;
+    padding: 40px 24px;
+    position: relative;
+  }
+
+  .stage{
+    width: 100%;
+    max-width: 600px;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* ---- hallmark badge: stamped like a genuine .925 silver mark ---- */
+  .hallmark{
+    width: 108px;
+    height: 108px;
+    margin: 0 auto 22px;
+    position: relative;
+    filter: drop-shadow(0 0 7px rgba(255,255,255,0.22));
+  }
+  .hallmark svg{ width:100%; height:100%; overflow: visible; }
+  .hallmark .ring-outer, .hallmark .ring-inner{
+    fill:none;
+    stroke: var(--silver-hi);
+    stroke-width: 1;
+    stroke-dasharray: 400;
+    stroke-dashoffset: 400;
+    animation: stamp 1.6s cubic-bezier(.4,0,.2,1) forwards;
+  }
+  .hallmark .ring-inner{ stroke: var(--silver-mid); animation-delay: .2s; }
+  .hallmark .tick{
+    stroke: var(--silver-mid);
+    stroke-width: 1;
+    opacity: 0;
+    animation: appear .5s ease-out forwards;
+    animation-delay: 1.5s;
+  }
+  .hallmark text{
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 27px;
+    fill: var(--silver-hi);
+    text-anchor: middle;
+    opacity: 0;
+    animation: appear .7s ease-out forwards;
+    animation-delay: 1.7s;
+  }
+  .hallmark .fine{
+    font-family: 'Jost', sans-serif;
+    font-size: 7px;
+    letter-spacing: 0.08em;
+    fill: var(--silver-mid);
+    text-anchor: middle;
+    opacity: 0;
+    animation: appear .7s ease-out forwards;
+    animation-delay: 1.9s;
+  }
+  .hallmark .glint{
+    fill: #ffffff;
+    opacity: 0;
+    animation: twinkle 2.8s ease-in-out infinite;
+  }
+  .hallmark .glint.g1{ animation-delay: 2.3s; }
+  .hallmark .glint.g2{ animation-delay: 3.2s; }
+  @keyframes stamp{ to{ stroke-dashoffset: 0; } }
+  @keyframes appear{ to{ opacity: 1; } }
+  @keyframes twinkle{
+    0%, 100%{ opacity: 0; transform: scale(0.6); }
+    50%{ opacity: 1; transform: scale(1); }
+  }
+
+  .eyebrow{
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    color: var(--silver-mid);
+    margin: 0 0 6px;
+  }
+
+  h1{
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: clamp(56px, 10.5vw, 88px);
+    line-height: 1;
+    margin: 0 0 14px;
+    letter-spacing: 0.01em;
+    background: linear-gradient(100deg,
+      var(--silver-dim) 0%, var(--silver-hi) 15%, var(--silver) 28%,
+      #ffffff 42%, var(--silver-dim) 58%, var(--silver) 72%,
+      #ffffff 88%, var(--silver-dim) 100%);
+    background-size: 260% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: shimmer 4s linear infinite;
+    animation-delay: 2.6s;
+    filter: drop-shadow(0 0 18px rgba(255,255,255,0.18));
+  }
+  @keyframes shimmer{
+    0%{ background-position: 0% 0; }
+    100%{ background-position: -260% 0; }
+  }
+
+  .tagline{
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 19px;
+    color: var(--silver-mid);
+    margin: 0 0 30px;
+    letter-spacing: 0.01em;
+  }
+
+  /* ---- swinging launch tag, like a jewellery price tag ---- */
+  .tag-wrap{
+    display: flex;
+    justify-content: center;
+    margin: 0 0 34px;
+  }
+  .tag-thread{
+    width: 1px;
+    height: 22px;
+    background: var(--line);
+    margin: 0 auto;
+  }
+  .tag{
+    transform-origin: top center;
+    animation: swing 4.5s ease-in-out infinite;
+  }
+  .tag-card{
+    border: 1px solid var(--line);
+    background: rgba(255,255,255,0.03);
+    padding: 12px 26px;
+    position: relative;
+  }
+  .tag-card::before{
+    content:"";
+    position:absolute;
+    top: -22px; left: 50%;
+    width: 6px; height: 6px;
+    margin-left: -3px;
+    border-radius: 50%;
+    border: 1px solid var(--silver-mid);
+  }
+  .tag-label{
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: var(--silver-dim);
+    margin: 0 0 4px;
+  }
+  .tag-date{
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    color: var(--silver-hi);
+    letter-spacing: 0.04em;
+  }
+  @keyframes swing{
+    0%, 100%{ transform: rotate(-2.5deg); }
+    50%{ transform: rotate(2.5deg); }
+  }
+
+  /* ---- countdown ---- */
+  .countdown{
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    margin: 0 0 34px;
+  }
+  .cd-cell{
+    min-width: 62px;
+    padding: 14px 6px 10px;
+    border: 1px solid var(--line);
+    background: rgba(255,255,255,0.025);
+  }
+  .cd-num{
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 34px;
+    color: var(--silver-hi);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+  .cd-label{
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--silver-dim);
+    margin-top: 6px;
+  }
+
+  .rule{
+    width: 44px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--silver-mid), transparent);
+    margin: 0 auto 30px;
+  }
+
+  .copy{
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--silver-mid);
+    max-width: 400px;
+    margin: 0 auto 36px;
+    font-weight: 300;
+  }
+  .copy strong{
+    color: var(--silver-hi);
+    font-weight: 500;
+  }
+
+  form{
+    display:flex;
+    gap: 0;
+    max-width: 380px;
+    margin: 0 auto 22px;
+    border: 1px solid var(--line);
+    background: rgba(255,255,255,0.03);
+    transition: border-color .3s ease, box-shadow .3s ease;
+  }
+  form:focus-within{
+    border-color: var(--silver-mid);
+    box-shadow: 0 0 16px rgba(255,255,255,0.12);
+  }
+
+  input[type="email"]{
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    padding: 16px 18px;
+    color: var(--silver-hi);
+    font-family: 'Jost', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    letter-spacing: 0.01em;
+  }
+  input[type="email"]::placeholder{ color: var(--silver-dim); }
+
+  button{
+    border: none;
+    background: transparent;
+    color: var(--silver-hi);
+    font-family: 'Jost', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.03em;
+    padding: 0 24px;
+    cursor: pointer;
+    border-left: 1px solid var(--line);
+    position: relative;
+    transition: color .3s ease, background .3s ease;
+    white-space: nowrap;
+  }
+  button:hover{ background: rgba(255,255,255,0.05); }
+
+  .note{
+    font-size: 12px;
+    color: var(--silver-dim);
+    margin: 0 0 46px;
+  }
+
+  .success{
+    display:none;
+    font-size: 17px;
+    color: var(--silver-hi);
+    margin: -10px 0 46px;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+  }
+
+  .socials{
+    display:flex;
+    justify-content:center;
+    gap: 28px;
+    font-size: 13px;
+  }
+  .socials a{
+    color: var(--silver-mid);
+    text-decoration: none;
+    position: relative;
+    padding-bottom: 3px;
+    transition: color .3s ease;
+  }
+  .socials a::after{
+    content:"";
+    position: absolute;
+    left:0; right:0; bottom:0;
+    height: 1px;
+    background: var(--silver-hi);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .3s ease;
+  }
+  .socials a:hover{ color: var(--silver-hi); }
+  .socials a:hover::after{ transform: scaleX(1); }
+
+  @media (prefers-reduced-motion: reduce){
+    .hallmark .ring-outer, .hallmark .ring-inner, .hallmark .tick, .hallmark text, .hallmark .glint,
+    h1, .bg-sweep, .tag{ animation: none !important; }
+    .hallmark .ring-outer, .hallmark .ring-inner{ stroke-dashoffset: 0; }
+    .hallmark .tick, .hallmark text{ opacity: 1; }
+    .hallmark .glint{ opacity: 0; }
+    h1{ background-position: 0 0; }
+    .bg-sweep{ display: none; }
+  }
+
+  @media (max-width: 480px){
+    form{ flex-direction: column; }
+    button{ border-left: none; border-top: 1px solid var(--line); padding: 14px; }
+    .countdown{ gap: 8px; }
+    .cd-cell{ min-width: 50px; padding: 10px 4px 8px; }
+    .cd-num{ font-size: 26px; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="bg-photo" id="bgPhoto"></div>
+  <div class="bg-fade"></div>
+  <div class="bg-sweep"></div>
+
+  <div class="stage">
+
+    <div class="hallmark" aria-hidden="true">
+      <svg viewBox="0 0 108 108">
+        <circle class="ring-outer" cx="54" cy="54" r="50" />
+        <circle class="ring-inner" cx="54" cy="54" r="42" />
+        <line class="tick" x1="54" y1="4" x2="54" y2="12"/>
+        <line class="tick" x1="54" y1="96" x2="54" y2="104"/>
+        <line class="tick" x1="4" y1="54" x2="12" y2="54"/>
+        <line class="tick" x1="96" y1="54" x2="104" y2="54"/>
+        <text x="54" y="52">925</text>
+        <text class="fine" x="54" y="68">STERLING</text>
+        <circle class="glint g1" cx="54" cy="12" r="1.4"/>
+        <circle class="glint g2" cx="96" cy="54" r="1.4"/>
+      </svg>
+    </div>
+
+    <p class="eyebrow">rupkaar.in</p>
+    <h1>Rupkaar</h1>
+    <p class="tagline">fine silver, quietly worn</p>
+
+    <div class="tag-wrap">
+      <div class="tag">
+        <div class="tag-thread"></div>
+        <div class="tag-card">
+          <p class="tag-label">OPENING</p>
+          <p class="tag-date">01 · 02 · 2027</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="countdown" id="countdown">
+      <div class="cd-cell"><div class="cd-num" id="cd-days">--</div><div class="cd-label">DAYS</div></div>
+      <div class="cd-cell"><div class="cd-num" id="cd-hours">--</div><div class="cd-label">HRS</div></div>
+      <div class="cd-cell"><div class="cd-num" id="cd-mins">--</div><div class="cd-label">MIN</div></div>
+      <div class="cd-cell"><div class="cd-num" id="cd-secs">--</div><div class="cd-label">SEC</div></div>
+    </div>
+
+    <div class="rule"></div>
+
+    <p class="copy">
+      A jewellery house built around <strong>fine budget luxury</strong> —
+      solid .925 silver, cut for everyday wear and priced for people who
+      collect, not just splurge. The doors open <strong>1st February 2027</strong>.
+    </p>
+
+    <form id="notifyForm">
+      <input type="email" id="emailInput" placeholder="your email" required>
+      <button type="submit">Notify me</button>
+    </form>
+    <p class="success" id="successMsg">You're on the list — see you on the 1st.</p>
+    <p class="note">One email, the day we open. No spam, ever.</p>
+
+    <nav class="socials">
+      <a href="#" target="_blank" rel="noopener">Instagram</a>
+      <a href="#" target="_blank" rel="noopener">Pinterest</a>
+      <a href="#" target="_blank" rel="noopener">WhatsApp</a>
+    </nav>
+
+  </div>
+
+<script>
+  const form = document.getElementById('notifyForm');
+  const success = document.getElementById('successMsg');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    form.style.display = 'none';
+    document.querySelector('.note').style.display = 'none';
+    success.style.display = 'block';
+  });
+
+  // countdown to 1 Feb 2027, 00:00 IST
+  const launch = new Date('2027-02-01T00:00:00+05:30').getTime();
+  function tick(){
+    const now = Date.now();
+    const diff = Math.max(0, launch - now);
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+    document.getElementById('cd-days').textContent = d;
+    document.getElementById('cd-hours').textContent = String(h).padStart(2,'0');
+    document.getElementById('cd-mins').textContent = String(m).padStart(2,'0');
+    document.getElementById('cd-secs').textContent = String(s).padStart(2,'0');
+  }
+  tick();
+  setInterval(tick, 1000);
+
+  // subtle parallax on the background photo
+  const bg = document.getElementById('bgPhoto');
+  window.addEventListener('mousemove', function(e){
+    const x = (e.clientX / window.innerWidth - 0.5) * 14;
+    const y = (e.clientY / window.innerHeight - 0.5) * 14;
+    bg.style.transform = 'translate(' + x + 'px,' + y + 'px) scale(1.03)';
+  });
+</script>
+
+</body>
+</html>
